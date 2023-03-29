@@ -1,0 +1,104 @@
+$paddingSmall: 8px;
+$paddingMedium: 18px;
+$paddingBig: 24px;
+$paddingLarge: 32px;
+$paddingEnormous: 64px;
+$paddingLeftRight: 5%;
+$dark: #363636;
+$gray: #A7A7A7;
+$gray-black: #727272;
+$orange: #F85D09;
+
+:root {
+  --headerHeight: 75px;
+  --bookPageContentPaddingTop: 20px;
+  --layoutPaddingTop: 5px;
+  --footerHeight: 104px;
+
+  --SearchPanelButtonHeight: 32px;
+  --SearchPanelButtonWidth: 32px;
+}
+
+@media (min-width: 600px) {
+  :root {
+    --headerHeight: 96px;
+    --bookPageContentPaddingTop: 48px;
+    --footerHeight: 55px;
+    --SearchPanelButtonHeight: 38px;
+    --SearchPanelButtonWidth: 38px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --headerHeight: 96px;
+
+    --footerHeight: 55px;
+    --SearchPanelButtonHeight: 38px;
+    --SearchPanelButtonWidth: 38px;
+  }
+}
+@media (min-width: 1000px) {
+  :root {
+    --layoutPaddingTop: 10px;
+    --headerHeight: 105px;
+  }
+}
+@media (min-width: 1200px) {
+  :root {
+    --bookPageContentPaddingTop: 42px;
+  }
+}
+
+@mixin SearchPanelButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: var(--SearchPanelButtonWidth);
+  height: var(--SearchPanelButtonHeight);
+  box-shadow: 0 2px 4px rgba(191, 196, 201, 0.2), 0 3px 4px rgba(191, 196, 201, 0.18),
+    0 1px 5px rgba(191, 196, 201, 0.24);
+  border-radius: 599px;
+}
+
+@mixin button {
+  padding-top: 28px;
+  letter-spacing: 0.2px;
+  font-weight: 600;
+  color: white;
+
+  border-radius: 20px;
+  font-size: 12px;
+  line-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .2s;
+  cursor: pointer;
+
+  & p {
+    height: 30px;
+  }
+}
+@mixin buttonActive {
+  background: $orange;
+
+  &:hover {
+    background: rgba(249, 212, 35, 1);
+  }
+}
+
+@mixin buttonBlock {
+  border: 1px solid #bfc4c9;
+  background: #f9f9fa;
+  color: #a7a7a7;
+}
+@mixin text($fontSize, $fontWeight, $lineHeight, $color) {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: $fontWeight;
+  font-size: $fontSize;
+  line-height: $lineHeight;
+  color: $color;
+}

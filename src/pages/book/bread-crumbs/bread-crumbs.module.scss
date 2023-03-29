@@ -1,0 +1,24 @@
+@import '../../../variables';
+
+.breadCrumbs {
+  margin: 0 -5.5%;
+    margin-top: 20px;
+  padding: 20px 0;
+  background: #f9f9fa;
+  @include text(12px, 500, 16px, #a7a7a7);
+  p {
+    margin: 0 5.5%;
+  }
+  @media (min-width: 768px) {
+    @include text(16px, 400, 24px, #a7a7a7);
+    padding: 23px 0;
+  }
+  @media (min-width: 1200px) {
+    padding: 23px 0;
+  }
+
+  @media (min-width: 1400px) {
+    @include text(14px, 400, 18px, #a7a7a7);
+    padding: 23px 0;
+  }
+}

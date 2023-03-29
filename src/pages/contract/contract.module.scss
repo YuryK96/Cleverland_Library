@@ -1,0 +1,41 @@
+@import 'src/variables';
+.contract {
+  .title {
+    padding-top: $paddingSmall;
+
+    @include text(18px, 700, 28px, #363636);
+
+    @media (min-width: 640px) {
+      @include text(32px, 700, 40px, #363636);
+    }
+  }
+
+  .content {
+    p:last-child {
+      padding-bottom: $paddingBig;
+      @media (min-width: 640px) {
+        padding-bottom: 62px;
+      }
+    }
+    &__title {
+      padding-top: $paddingBig;
+      @include text(16px, 600, 24px, #363636);
+    }
+    &__text {
+      margin-top: $paddingMedium;
+      @include text(15px, 400, 20px, #363636);
+      @media (min-width: 640px) {
+        @include text(16px, 400, 24px, #363636);
+      }
+    }
+    &__smallPadding {
+      padding-left: $paddingLarge;
+    }
+    &__mediumPadding {
+      padding-left: 60px;
+    }
+    &__bigPadding {
+      padding-left: 90px;
+    }
+  }
+}

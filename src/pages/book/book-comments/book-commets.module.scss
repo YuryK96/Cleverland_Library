@@ -1,0 +1,115 @@
+@import 'src/variables';
+
+.comments {
+  &__title {
+    padding-top: $paddingMedium;
+
+    padding-bottom: $paddingSmall;
+    margin-bottom: $paddingSmall;
+    @include text(18px, 700, 28px, #363636);
+    border-bottom: 1px solid #ebebeb;
+    @media (min-width: 600px) {
+      width: 40%;
+    }
+    @media (min-width: 1000px) {
+      width: 30%;
+    }
+    span {
+      @include text(14px, 400, 24px, #a7a7a7);
+    }
+
+    .arrow {
+      border: solid rgba(54, 54, 54, 1);
+      border-width: 0 2px 2px 0;
+      margin-bottom: 2px;
+      display: inline-block;
+      margin-left: 29px;
+      padding: 4px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      transition: 0.2s;
+    }
+    .arrowOpen {
+      rotate: (180deg);
+      transition: 0.2s;
+      margin-bottom: -2px;
+      border-width: 0 2px 2px 0;
+    }
+  }
+  &__container {
+    overflow: hidden;
+    transition: 0.2s;
+    max-height: 0;
+
+      .buttonWrapper {
+          display: flex;
+          width: 350px;
+          @media (max-width: 768px) {
+              width: 100%;
+
+          }
+      }
+  }
+  &__container_active {
+    transition: 0.2s;
+    max-height: 9999px;
+  }
+  &__wrapper {
+    padding-top: $paddingLarge;
+    @media (min-width: 1000px) {
+      padding-top: 49px;
+    }
+  }
+
+
+  &__person {
+    @media (min-width: 600px) {
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__avatar {
+      width: 32px;
+      height: 32px;
+
+    float: left;
+    margin-right: $paddingMedium;
+      img {
+          height: 100%;
+
+      }
+    @media (min-width: 600px) {
+      float: none;
+        margin-right: $paddingBig;
+    }
+  }
+  &__name {
+    padding-bottom: 1.5px;
+
+    @media (min-width: 600px) {
+      padding-right: $paddingBig;
+    }
+  }
+  &__data {
+    padding-top: 1.5px;
+  }
+  &__stars {
+    padding-top: 14px;
+    display: flex;
+    padding-bottom: $paddingSmall;
+    img {
+      margin-right: 16px;
+    }
+    @media (min-width: 600px) {
+      padding-top: $paddingMedium;
+      padding-bottom: $paddingMedium;
+    }
+  }
+
+  &__descr {
+    @include text(15px, 400, 20px, #363636);
+    @media (min-width: 600px) {
+      @include text(16px, 400, 24px, #363636);
+    }
+  }
+}

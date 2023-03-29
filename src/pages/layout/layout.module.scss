@@ -1,0 +1,15 @@
+@import 'src/variables';
+
+.Layout {
+  padding: 0 $paddingLeftRight;
+
+}
+.wrapperContent {
+    margin-top: 20px;
+    @media (max-width: 1000px) {
+        margin-top: 0;
+    }
+  width: 100%;
+
+  min-height: calc(98.5vh - var(--headerHeight) - var(--footerHeight));
+}

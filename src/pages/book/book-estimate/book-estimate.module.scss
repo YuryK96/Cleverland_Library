@@ -1,0 +1,187 @@
+@import "src/variables";
+
+.bookLayout {
+
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background: rgba(54, 54, 54, 0.3);
+    z-index: 7;
+    margin: 0 -$paddingLeftRight;
+    margin-bottom: 0;
+    margin-top: calc((var(--headerHeight) + 20px) * -1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+.exitCover{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 7;
+}
+    .container {
+        z-index: 9;
+        width: 528px;
+        height: 508px;
+        background: white;
+        border-radius: 16px;
+
+        @media (max-width: 570px) {
+            margin: 0 20px;
+            height: fit-content;
+        }
+
+        .title {
+            @include text(24px, 700, 30px, $dark);
+            margin-top: 48px;
+            text-align: center;
+            margin-left: 80px;
+
+            @media (max-width: 570px) {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-left: 0;
+                margin-top: 42px;
+                @include text(18px, 700, 28px, $dark);
+            }
+        }
+
+        .closeButton {
+            float: right;
+            margin-top: $paddingLarge;
+            margin-right: $paddingLarge;
+            cursor: pointer;
+
+            @media (max-width: 570px) {
+                svg {
+                    width: 32px;
+                    height: 32px;
+                }
+
+                margin-top: 16px;
+                margin-right: 16px;
+            }
+
+
+            svg circle, svg path {
+                transition: .2s;
+            }
+
+            &:hover svg circle {
+                border: 1px solid red;
+                fill: rgba(249, 212, 35, 1);
+                transition: .2s;
+            }
+
+            &:hover svg path {
+                fill: white;
+                transition: .2s;
+            }
+        }
+
+        .subTitle {
+            @include text(16px, 600, 24px, $dark);
+            text-align: center;
+            margin-top: $paddingLarge;
+
+
+            @media (max-width: 570px) {
+                margin-top: $paddingBig;
+            }
+        }
+
+        .rating {
+            margin-top: 20px;
+
+            .star_container {
+                display: flex;
+                justify-content: center;
+                flex-direction: row-reverse;
+
+
+                @media (max-width: 570px) {
+                    svg {
+                        width: 26px;
+                        height: 26px;
+                    }
+                }
+                .star_item {
+                    padding-left: 19px;
+                    cursor: pointer;
+
+
+
+                    &:hover svg, &:hover ~ .star_item svg {
+                        fill: rgba(255, 188, 31, 1);
+
+
+                    }
+
+                    &:last-child {
+                        padding-left: 0;
+
+                    }
+                }
+
+                .star_full {
+                    svg {
+                        fill: rgba(255, 188, 31, 1);
+                    }
+                }
+            }
+        }
+
+        .comment {
+            margin-top: 37px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+
+            @media (max-width: 570px) {
+
+                margin-left: 16px;
+                margin-right: 16px;
+
+                form {
+                    width: 100%;
+                }
+            }
+
+            textarea {
+                resize: none;
+                width: 416px;
+                height: 132px;
+                border: none;
+                padding-left: 12px;
+                padding-top: 18px;
+                background: #F9F9FA;
+                @media (max-width: 570px) {
+                    width: 100%;
+                }
+
+
+                &::placeholder {
+
+                    @include text(14px, 400, 18px, $gray);
+                }
+            }
+
+        }
+
+        .button {
+            width: 100%;
+            padding: 52px 56px 48px 56px;
+            @media (max-width: 570px) {
+                padding: 44px 16px 32px;
+            }
+        }
+    }
+
+}

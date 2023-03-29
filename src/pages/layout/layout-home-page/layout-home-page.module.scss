@@ -1,0 +1,12 @@
+@import 'src/variables';
+
+.LayoutHomePage {
+  display: flex;
+  justify-items: center;
+
+  .wrapperNavigation {
+    @media (max-width: 1000px) {
+      display: none;
+    }
+  }
+}

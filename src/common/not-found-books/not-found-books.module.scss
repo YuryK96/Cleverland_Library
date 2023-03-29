@@ -1,0 +1,18 @@
+@import "../../variables";
+
+.notFoundBooks {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .title {
+        text-align: center;
+        @include text(18px,700,28px,#A7A7A7);
+        @media (min-width: 768px) {
+            @include text(32px,700,40px,#A7A7A7);
+
+        }
+
+    }
+}
+

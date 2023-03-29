@@ -1,0 +1,176 @@
+@import 'src/variables';
+
+nav {
+
+    @media (min-width: 1000px) {
+        min-width: 200px;
+    }
+  .showcase {
+    border-bottom: 1px solid rgb(0, 0, 0);
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 1000px) {
+      border-bottom: none;
+    }
+    @media (min-width: 450px) and (max-width: 1000px) {
+      width: 255px;
+    }
+    .arrow {
+      border: solid black;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      margin-right: 5%;
+      width: 5px;
+      height: 5px;
+      padding: 4px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+    .arrowOpen {
+      margin-top: 5px;
+
+      rotate: (180deg);
+      border: solid rgba(248, 54, 0, 1);
+      border-width: 0 2px 2px 0;
+    }
+    .arrowColor {
+      border: solid rgba(248, 54, 0, 1);
+      border-width: 0 2px 2px 0;
+    }
+    &:hover {
+      color: rgba(249, 212, 35, 1);
+      border-bottom: 1px solid rgba(249, 212, 35, 1);
+      .arrow {
+        border: solid rgba(249, 212, 35, 1);
+        border-width: 0 2px 2px 0;
+      }
+    }
+  }
+
+  .activeShowcase {
+    color: rgba(248, 54, 0, 1);
+    border-bottom: 1px solid rgba(248, 54, 0, 1);
+  }
+  h1 {
+    @include text(18px, 700, 28px, #363636);
+
+    letter-spacing: 0.1px;
+
+    cursor: pointer;
+    padding-bottom: $paddingSmall;
+  }
+  .booksAll {
+    display: inline-block;
+    @include text(18px, 700, 28px, #363636);
+
+    letter-spacing: 0.1px;
+    margin-top: $paddingMedium;
+    cursor: pointer;
+    @media (max-width: 450px) {
+      @include text(16px, 400, 24px, #363636);
+
+    }
+  }
+  .activeBooksAll {
+    @media (max-width: 450px) {
+      @include text(18px, 700, 28px, rgba(248, 54, 0, 1));
+    }
+  }
+  .wrapperList {
+    overflow: hidden;
+    transition: 0.2s;
+    max-height: 0;
+
+    ul {
+      padding-left: $paddingSmall;
+      padding-bottom: 10px;
+
+      li {
+        cursor: pointer;
+
+        padding-top: 16px;
+        width: max-content;
+        @media (max-width: 600px) {
+          width: auto;
+          padding-right: 10px;
+        }
+        .name {
+          @include text(16px, 400, 24px, #363636);
+
+          &:hover {
+            color: rgba(249, 212, 35, 1);
+          }
+        }
+
+        .nameActive {
+          @include text(18px, 700, 28px, rgba(248, 54, 0, 1));
+        }
+        .count {
+          @include text(14px, 400, 24px, #a7a7a7);
+          letter-spacing: 0.1px;
+        }
+      }
+    }
+  }
+  .wrapperListOpen {
+    transition: 0.2s;
+    max-height: 999px;
+  }
+  .contract {
+    width: 90%;
+    padding-top: 42px;
+    @media (min-width: 450px) and (max-width: 1000px) {
+      width: 255px;
+    }
+  }
+  .terms {
+    width: 90%;
+    padding-top: 32px;
+    @media (max-width: 1000px) {
+      padding-top: 22px;
+      @media (min-width: 450px) and (max-width: 1000px) {
+        width: 255px;
+      }
+    }
+  }
+  .activeTerms,
+  .activeContract,
+  .activeBooksAll {
+    color: rgba(248, 54, 0, 1);
+  }
+  .activeTerms,
+  .activeContract {
+    @media (max-width: 1000px) {
+      border-bottom: 1px solid rgba(248, 54, 0, 1);
+    }
+  }
+  .terms:hover,
+  .contract:hover,
+  .booksAll:hover,
+  .name:hover {
+    color: rgba(249, 212, 35, 1);
+  }
+  .terms:hover,
+  .contract:hover {
+    @media (max-width: 1000px) {
+      border-bottom: 1px solid rgba(249, 212, 35, 1);
+    }
+  }
+
+
+
+
+    .profile:hover,
+    .exit:hover {
+        border-bottom: 1px solid rgba(249, 212, 35, 1);
+        color: rgba(249, 212, 35, 1);
+    }
+    .profileActive,
+    .exitActive {
+        border-bottom: 1px solid rgba(248, 54, 0, 1);
+        color: rgba(248, 54, 0, 1);
+    }
+}

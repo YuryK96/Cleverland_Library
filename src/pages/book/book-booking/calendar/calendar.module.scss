@@ -1,0 +1,114 @@
+@import "src/variables";
+.calendar {
+    width: 256px;
+    box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18), 0px 1px 5px rgba(191, 196, 201, 0.24);
+    border-radius: 8px;
+
+
+    .header {
+        height: 40px;
+        margin: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+
+        .month_year {
+            display: flex;
+            @include text(16px,400,24px,$gray);
+
+            .list {
+                margin-left: 11px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+
+        }
+        .month_list {
+            position: absolute;
+            overflow: hidden;
+            max-height: 0;
+            @include text(16px,400,24px,$gray);
+
+        }
+
+        .open_month_list {
+            max-height: 200px;
+            overflow: auto;
+            background: white;
+            border: 1px solid $gray;
+            margin-left: 120px;
+            margin-top: 100px;
+            ul {
+                li {
+                    padding: 5px;
+                    cursor: pointer;
+                }
+            }
+        }
+        .buttons_wrapper {
+            display: flex;
+            .button {
+                cursor: pointer;
+
+                &:first-child {
+                    margin-right: 10px;
+                }
+            }
+        }
+
+    }
+
+    .body {
+        width: 224px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 16px;
+        .dayOfTheWeek {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @include text(12px,500,16px,$orange)
+        }
+
+        .day {
+            padding: 0;
+            border: none;
+            font: inherit;
+            color: inherit;
+            background-color: transparent;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            @include text(12px,400,16px,#BFC4C9)
+        }
+
+
+        .isNext2Days {
+            color: black;
+        }
+
+
+        .isToday {
+            color: $orange;
+        }
+        .isSelected {
+            color: white;
+            background: $orange;
+            border-radius: 16px;
+        }
+        .isWeekend {
+            color: $gray;
+            background: #FEEBEA;
+            border-radius: 16px;
+        }
+    }
+
+}

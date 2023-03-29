@@ -1,0 +1,91 @@
+@import "src/variables";
+
+.error {
+    position: absolute;
+    width: 90%;
+    margin-top: 55px;
+    z-index: 7;
+    &__container {
+
+        background: #FEEBEA;
+        border: 1px solid rgba(244, 44, 79, 1);
+        border-radius: 5px;
+        padding: 20px $paddingLarge;
+
+
+        @media (max-width: 800px) {
+            padding: $paddingMedium $paddingBig;
+        }
+        @media (max-width: 600px) {
+            padding: 12px $paddingMedium ;
+        }
+    }
+    &__item {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__wrapper {
+        display: flex;
+
+        @media (max-width: 600px) {
+            width: 90%;
+        }
+
+    }
+    &__text {
+        display: flex;
+        align-items: center;
+        padding-left: $paddingBig;
+        @include text(16px,600,24px,#363636);
+
+        @media (max-width: 800px) {
+            padding-left: 15px;
+            @include text(14px,600,18px,#363636);
+
+        }
+
+        @media (max-width: 600px) {
+            width: 90%;
+        }
+    }
+    &__signIcon {
+        display: flex;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+
+
+        @media (max-width: 800px) {
+            width: 20px;
+            height: 20px;
+            margin-top: -2px;
+        }
+
+    }
+
+    &__crossIcon {
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+
+
+        @media (max-width: 800px) {
+            width: 18px;
+            height: 18px;
+
+        }
+    }
+}
+
+.error_close {
+    display: none;
+}
+
+.success {
+    background: #EBF9F1;
+    border: 1.5px solid #00CA71;
+}
+
+.error_fixed {
+    position: fixed;
+}

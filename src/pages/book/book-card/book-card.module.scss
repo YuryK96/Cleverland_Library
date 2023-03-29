@@ -1,0 +1,275 @@
+@import '../../../variables';
+
+.book {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  @media (max-width: 670px) {
+    justify-content: center;
+  }
+  @media (min-width: 1000px) {
+    padding-left: 10px;
+  }
+
+  margin-bottom: 60px;
+
+  .BookItem {
+    margin-top: $paddingMedium;
+    width: 288px;
+    height: 470px;
+
+    @media (min-width: 768px) {
+      width: 190px;
+    }
+
+    box-shadow: 0 2px 4px rgba(191, 196, 201, 0.2), 0 3px 4px rgba(191, 196, 201, 0.18),
+      0 1px 5px rgba(191, 196, 201, 0.24);
+    border-radius: 10px;
+
+    .cover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: $paddingMedium;
+
+
+        img {
+            width: 175px;
+            height: 245px;
+        }
+    }
+
+    .stars {
+      display: flex;
+      padding: $paddingMedium 0 $paddingMedium $paddingSmall;
+
+      .star {
+        padding-left: 10px;
+      }
+        .noStars {
+            @include text(14px,400,18px,#A7A7A7);
+            @media (max-width: 764px) {
+                padding: 0 $paddingSmall;
+
+            }
+        }
+    }
+
+    .info {
+      height: 80px;
+
+      .name {
+        padding: 0 $paddingSmall;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+
+        @include text(14px, 600, 18px, #363636);
+
+          .redLetter {
+             background: none;
+              color: rgba(255, 82, 83);
+          }
+
+          @media (max-width: 764px) {
+              padding: 0 $paddingMedium;
+
+          }
+      }
+
+      .author {
+        padding: $paddingSmall $paddingSmall  0;
+          @media (max-width: 764px) {
+              padding: $paddingSmall $paddingMedium  0;
+
+          }
+        @include text(12px, 400, 18px, #727272);
+
+          @media (min-width: 768px) {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp:1;
+              -webkit-box-orient: vertical;
+          }
+      }
+    }
+  }
+}
+.bookSquare {
+
+
+  @media (min-width: 768px) {
+    display: grid;
+      justify-content: space-between;
+
+    grid-template-columns: repeat(auto-fill, 191px)
+
+
+  }
+
+    .author {
+
+        @media (max-width: 370px) {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+    }
+
+    .button {
+
+        display: flex;
+        justify-content: center;
+    }
+}
+.bookList {
+  flex-direction: column;
+  .bookWrapper {
+    width: 100%;
+      .stars{
+          .noStars {
+              padding: 0 $paddingMedium  ;
+
+
+          }
+      }
+    .info {
+        .name {
+            padding: 0 $paddingMedium  ;
+        }
+        .author{
+            padding: $paddingSmall $paddingMedium  0;
+        }
+
+    }
+
+  }
+
+
+  .BookItem {
+    width: 100%;
+    height: 260px;
+
+    @media (max-width: 590px) {
+        height: fit-content;
+
+
+    }
+
+    @media (max-width: 480px) {
+      height: fit-content;
+    }
+    .cover {
+        margin-left: $paddingSmall;
+      float: left;
+        @media (min-width: 768px) {
+            margin-left: $paddingMedium;
+        }
+        img {
+
+            padding-bottom: 10%;
+
+
+            @media (max-width: 590px) {
+                height: 200px;
+            }
+            @media (max-width: 480px) {
+                height: 170px;
+            }
+
+
+        }
+      @media (max-width: 590px) {
+        width: 30%;
+      }
+
+
+    }
+    .wrapper {
+      height: inherit;
+      display: grid;
+      align-items: center;
+
+      grid-auto-columns: 50% 50%;
+      grid-template-rows: 60% 40%;
+      grid-template-areas:
+        'i  i'
+        's  b';
+
+      @media (max-width: 590px) {
+        grid-auto-columns: 100%;
+        grid-template-rows: min-content 20% 40%;
+        grid-template-areas:
+          'i'
+          's'
+          'b';
+      }
+      .stars {
+        grid-area: s;
+      }
+      .info {
+        padding-top: 5%;
+        grid-area: i;
+        align-self: start;
+        height: min-content;
+
+        @media (min-width: 900px) {
+          padding-top: 3%;
+        }
+        & .name {
+          @media (min-width: 500px) {
+            font-size: 19px;
+          }
+          @media (min-width: 768px) {
+            font-size: 24px;
+            line-height: 30px;
+          }
+        }
+        & .author {
+          @media (min-width: 768px) {
+            font-size: 14px;
+          }
+        }
+      }
+      .button {
+          display: flex;
+          justify-content: end;
+        grid-area: b;
+          max-width: 274px;
+
+          @media (min-width: 850px) {
+
+              margin-left: 30%;
+          }
+          @media (min-width: 1000px) {
+
+              margin-left: 0;
+          }
+          @media (min-width: 1200px) {
+
+              margin-left: 30%;
+          }
+          @media (min-width: 1450px) {
+
+              margin-left: 50%;
+          }
+          @media (min-width: 1850px) {
+
+              margin-left: 60%;
+          }
+
+
+      }
+    }
+  }
+}

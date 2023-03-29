@@ -1,0 +1,384 @@
+@import 'src/variables';
+
+.bookPage {
+
+    .wrapperError {
+        position: absolute;
+        width:100%;
+        margin-top: -120px;
+
+        @media (max-width: 1000px) {
+
+            margin-top: -110px;
+        }
+        @media (max-width: 600px) {
+
+            margin-top: -100px;
+        }
+    }
+  .content {
+    margin-top: var(--bookPageContentPaddingTop);
+
+    @media (min-width: 600px) {
+      min-height: 202px;
+    }
+    @media (min-width: 900px) {
+      min-height: 340px;
+    }
+    @media (min-width: 1000px) {
+      min-height: 493px;
+    }
+
+    .cover {
+      margin: 0 auto;
+      width: 191px;
+      height: 265px;
+
+      .nonCover,
+      .oneCover {
+          width: 100%;
+          height: 100%;
+        img {
+          width: inherit;
+          height: 100%;
+        }
+      }
+
+      @media (min-width: 600px) {
+        width: 193px;
+        height: 282px;
+        float: left;
+        margin-right: $paddingMedium;
+      }
+        @media (min-width: 800px) {
+            margin-bottom: $paddingMedium;
+        }
+      @media (min-width: 900px) {
+        width: 245px;
+        height: 352px;
+
+        margin-bottom: $paddingMedium;
+      }
+      @media (min-width: 1000px) {
+        width: 355px;
+        height: fit-content;
+
+        margin-bottom: 64px;
+        margin-right: $paddingLarge;
+      }
+    }
+
+    .infoWrapper {
+      @media (min-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .info {
+        padding-top: $paddingMedium;
+        @media (min-width: 600px) {
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
+          padding-top: 0;
+        }
+
+        .name {
+          @include text(18px, 700, 28px, #363636);
+          @media (min-width: 600px) {
+            @include text(24px, 700, 30px, #363636);
+            padding-top: $paddingBig;
+          }
+        }
+
+        .author {
+          padding-top: $paddingSmall;
+          @include text(12px, 400, 18px, #a7a7a7);
+
+          @media (min-width: 600px) {
+            @include text(14px, 600, 18px, #a7a7a7);
+            padding-top: $paddingBig;
+          }
+        }
+
+        .button {
+          padding-top: 32px;
+          max-width: 306px;
+          margin: auto;
+            display: flex;
+
+          @media (min-width: 600px) {
+            margin: 0 0 0 -$paddingMedium;
+          }
+        }
+      }
+    }
+
+    .about {
+      width: 100%;
+      padding-top: 42px;
+      @media (min-width: 600px) {
+        padding-top: 48px;
+      }
+      @media (min-width: 900px) {
+        padding-top: 62px;
+      }
+
+      .title {
+        padding-bottom: $paddingSmall;
+        margin-bottom: $paddingSmall;
+        border-bottom: 1px solid #ebebeb;
+
+        @media (min-width: 600px) {
+          width: 27%;
+        }
+
+        @include text(18px, 700, 28px, #363636);
+
+        @media (min-width: 600px) {
+          margin-bottom: $paddingMedium;
+          @include text(16px, 600, 24px, #363636);
+        }
+        @media (min-width: 900px) and (max-width: 1000px) {
+          margin-top: $paddingMedium;
+        }
+      }
+
+      &Content,
+      &2Content {
+        @include text(12px, 400, 18px, #363636);
+        @media (min-width: 600px) {
+          @include text(16px, 400, 25px, #363636);
+        }
+      }
+
+      &2Content {
+        padding-bottom: 42px;
+        @media (min-width: 600px) {
+          padding-top: $paddingMedium;
+          padding-bottom: 52px;
+        }
+        @media (min-width: 900px) {
+          padding-bottom: 42px;
+        }
+      }
+    }
+
+    .rating {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+        margin-top: 52px;
+      &Title {
+        padding-bottom: $paddingSmall;
+        margin-bottom: $paddingSmall;
+        border-bottom: 1px solid #ebebeb;
+        @media (min-width: 600px) {
+          width: 40%;
+        }
+        @media (min-width: 1000px) {
+          width: 30%;
+        }
+        @include text(16px, 600, 24px, #363636);
+
+        @media (min-width: 600px) and (max-width: 900px) {
+          @include text(16px, 600, 24px, #363636);
+        }
+      }
+
+      .starsWrapper {
+        display: flex;
+        align-items: center;
+        padding-top: 20px;
+        padding-bottom: 57px;
+        @media (min-width: 600px) {
+          padding-top: 4px;
+          padding-bottom: 28px;
+        }
+        @media (min-width: 900px) {
+          padding-bottom: 67px;
+        }
+
+        .stars {
+          display: flex;
+          padding: $paddingMedium 0;
+          @media (min-width: 300px) and (max-width: 600px) {
+            padding: $paddingSmall 0;
+
+            width: 80%;
+            height: 65px;
+            @media (min-width: 450px) and (max-width: 600px) {
+              width: 60%;
+            }
+            .star img {
+              width: 80%;
+              height: 80%;
+            }
+          }
+
+          .star {
+            padding-right: 10px;
+          }
+        }
+
+        .ratingNumber {
+          @media (min-width: 600px) {
+            padding-left: 14px;
+          }
+          @include text(18px, 700, 28px, #363636);
+        }
+      }
+
+      .starsWrapperZero {
+        flex-wrap: wrap;
+
+        .ratingNumber {
+          @include text(14px, 400, 18px, #363636);
+        }
+      }
+    }
+
+    .dopInfo {
+      &__title {
+        @include text(18px, 700, 28px, #363636);
+        padding-bottom: $paddingSmall;
+        margin-bottom: $paddingSmall;
+        border-bottom: 1px solid #ebebeb;
+        @media (min-width: 600px) {
+          width: 40%;
+        }
+        @media (min-width: 1000px) {
+          width: 30%;
+        }
+        @media (min-width: 700px) {
+          @include text(16px, 600, 24px, #363636);
+          margin-bottom: $paddingBig;
+        }
+      }
+
+      &__wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        @media (min-width: 700px) {
+          flex-direction: row;
+        }
+      }
+
+      &__column {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      &__option {
+        text-align: start;
+        width: 40%;
+        @include text(12px, 500, 16px, #a7a7a7);
+        display: inline-block;
+
+        @media (min-width: 700px) {
+          @include text(14px, 600, 18px, #a7a7a7);
+          width: 50%;
+        }
+
+        @media (min-width: 1000px) {
+          @include text(16px, 600, 24px, #a7a7a7);
+          width: 40%;
+        }
+      }
+
+      &__descr {
+        @include text(12px, 400, 16px, #363636);
+        display: inline-block;
+        width: 40%;
+        @media (min-width: 700px) {
+          @include text(14px, 400, 18px, #363636);
+        }
+
+        @media (min-width: 1000px) {
+          @include text(16px, 400, 24px, #363636);
+        }
+      }
+
+      &__optionWrapper {
+        display: flex;
+        padding-bottom: $paddingMedium;
+      }
+    }
+
+    .comments {
+      &__title {
+        padding-top: $paddingMedium;
+        padding-bottom: $paddingSmall;
+        margin-bottom: $paddingSmall;
+        @include text(18px, 700, 28px, #363636);
+        border-bottom: 1px solid #ebebeb;
+        @media (min-width: 600px) {
+          width: 40%;
+        }
+        @media (min-width: 1000px) {
+          width: 30%;
+        }
+        span {
+          @include text(14px, 400, 24px, #a7a7a7);
+        }
+      }
+      &__wrapper {
+        padding-top: $paddingLarge;
+        @media (min-width: 1000px) {
+          padding-top: 49px;
+        }
+      }
+      &__wrapper:nth-child(2) {
+        padding-top: 0;
+      }
+
+      &__person {
+        @media (min-width: 600px) {
+          display: flex;
+          align-items: center;
+        }
+      }
+      &__avatar {
+        float: left;
+        padding-right: $paddingMedium;
+        @media (min-width: 600px) {
+          float: none;
+          padding-right: $paddingBig;
+        }
+      }
+      &__name {
+        padding-bottom: 1.5px;
+
+        @media (min-width: 600px) {
+          padding-right: $paddingBig;
+        }
+      }
+      &__data {
+        padding-top: 1.5px;
+      }
+      &__stars {
+        padding-top: 14px;
+        display: flex;
+        padding-bottom: $paddingSmall;
+        img {
+          margin-right: 16px;
+        }
+        @media (min-width: 600px) {
+          padding-top: $paddingMedium;
+          padding-bottom: $paddingMedium;
+        }
+      }
+
+      &__descr {
+        @include text(15px, 400, 20px, #363636);
+        @media (min-width: 600px) {
+          @include text(16px, 400, 24px, #363636);
+        }
+      }
+    }
+
+
+  }
+}

@@ -1,0 +1,8 @@
+@import "src/variables";
+
+.textClassEstimate {
+    @include text(16px,600,150%,white);
+    p {
+        height: 52px;
+    }
+}

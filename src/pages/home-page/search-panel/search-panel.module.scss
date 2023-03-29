@@ -1,0 +1,174 @@
+@import 'src/variables';
+
+.searchPanel {
+  overflow-x: hidden;
+  height: calc(var(--SearchPanelButtonHeight) + 5px);
+  padding: 0 2px;
+  @media (min-width: 1000px) {
+    padding-left: 10px;
+  }
+
+  .container {
+    height: inherit;
+    display: flex;
+    justify-content: space-between;
+
+    .form {
+      display: flex;
+      transition: 0.2s;
+      flex: 0 1 30%;
+
+      @media (min-width: 768px) {
+        flex-basis: 100%;
+      }
+
+      .containerSearchFilter {
+        display: flex;
+          align-items: center;
+        flex: 0 1 100%;
+
+        .searchButton {
+
+
+
+          @include SearchPanelButton;
+            width: 350px;
+            @media (max-width: 767px) {
+
+                width: 38px;
+            }
+          .searchWrapper {
+              input {
+                  caret-color: rgba(248, 54, 0, 1);
+                  @include text(14px,400,18px,#363636);
+
+                  @media (max-width: 568px) {
+                      @include text(12px,400,18px,#363636)
+                  }
+              }
+              input:focus {
+                  outline: none;
+
+              }
+            width: 90%;
+            display: flex;
+
+
+            @media (max-width: 768px) {
+              justify-content: center;
+
+            }
+
+            & svg {
+              margin-right: 3%;
+            }
+          }
+          .searchButtonClose {
+              cursor: pointer;
+            @media (max-width: 768px) {
+              padding-right: 3%;
+            }
+          }
+          @media (min-width: 768px) {
+            justify-content: space-between;
+            padding: 0 3%;
+
+
+          }
+        }
+
+        .searchButton input {
+          border: 0;
+          width: 0;
+          @media (min-width: 768px) {
+            width: 100%;
+          }
+        }
+
+        .searchButtonActive {
+          justify-content: space-between;
+
+            @media (max-width: 768px) {
+                width: 55%;
+            }
+        }
+
+        .searchButtonActive svg {
+          margin-left: 10px;
+
+          @media (min-width: 768px) {
+            margin-left: 0;
+          }
+        }
+
+        .searchButtonActive input {
+          margin-left: 10px;
+          width: 100%;
+
+          @media (min-width: 768px) {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+
+    .activeForm {
+      flex-basis: 100%;
+    }
+
+    .containerSorting {
+      display: flex;
+      justify-content: flex-end;
+      flex: 0 1 28%;
+
+      .sortSquareButton {
+        cursor: pointer;
+
+        margin-right: 16px;
+        @include SearchPanelButton;
+
+        &:hover {
+          background: rgba(249, 212, 35, 1);
+        }
+      }
+      .sortSquareButtonActive {
+        background: rgba(248, 54, 0, 1);
+
+        & svg path {
+          fill: white;
+        }
+      }
+
+      .sortSquareButtonActive.sortSquareButton:hover,
+      .sortListButtonActive.sortListButton:hover {
+        background: rgba(248, 54, 0, 1);
+      }
+
+      .sortListButton {
+        cursor: pointer;
+        @include SearchPanelButton;
+
+        &:hover {
+          background: rgba(249, 212, 35, 1);
+        }
+      }
+
+      .sortListButtonActive {
+        background: rgba(248, 54, 0, 1);
+
+        & svg path {
+          fill: white;
+        }
+      }
+    }
+  }
+
+  .containerActive {
+    width: 200vw;
+    overflow-x: hidden;
+
+    @media (min-width: 768px) {
+      width: 100%;
+    }
+  }
+}

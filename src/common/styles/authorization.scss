@@ -1,0 +1,297 @@
+@import "src/variables";
+
+.authorization_wrapper {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(231.58deg, #F83600 -53.35%, #F9D423 297.76%);
+
+
+    .authorization_title {
+        @include text(32px, 700, 40px, white);
+        margin-bottom: 46px;
+
+        @media (max-width: 580px) {
+            position: absolute;
+            top: 16px;
+            @include text(18px, 700, 28px, white);
+            margin-bottom: $paddingSmall;
+
+        }
+    }
+
+    .authorization_item {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+
+        .authorization_container {
+            background: white;
+            display: flex;
+            align-items: start;
+            justify-content: start;
+            flex-direction: column;
+            min-height: 492px;
+            padding: 48px 56px;
+            width: 528px;
+            border-radius: 16px;
+          &_personalArea {
+              min-height:466px;
+
+              @media (max-width:580px ) {
+                  min-height:420px;
+              }
+              @media (max-width:519px ) {
+                  min-height:390px;
+              }
+              @media (max-width:418px ) {
+                  min-height:454px;
+              }
+          }
+            &__toPersonalArea {
+                border-radius: 16px 16px 0 0;
+                margin: -48px 0 32px -56px;
+                display: flex;
+                background: #F9F9FA;
+                align-items: center;
+                width: calc( 100% + 112px);
+                height: 64px;
+
+                span {
+                    @include text(12px,600,18px,$gray-black);
+                    margin-left: 15px;
+                }
+            }
+            &__wrapperImg {
+                margin-left: 19px;
+            }
+            form {
+                width: 100%;
+            }
+
+            @media (max-width: 580px) {
+                width: 90%;
+                margin: 0 5%;
+                padding: 24px $paddingMedium;
+                &__toPersonalArea {
+                    width: calc( 100% + 36px);
+                    margin-left: -18px;
+                    margin-top: -24px;
+                }
+            }
+
+
+            &__header {
+                @include text(24px, 700, 30px, $dark)
+            }
+
+            &__steps {
+                @include text(14px, 600, 18px, $dark);
+                margin-top: $paddingSmall;
+
+            }
+
+
+            &__form {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 32px;
+
+
+            }
+
+            &__WrapperSecondInput {
+                margin-top: 16px;
+            }
+
+            &__WrapperFirstInput, &__WrapperSecondInput {
+                width: 100%;
+                position: relative;
+
+                input {
+                    @include text(14px, 400, 18px, $dark);
+                    outline: none;
+                    padding-top: 12px;
+                    padding-left: 12px;
+                    caret-color: rgba(248, 54, 0, 1);
+                }
+
+
+                .floating-label {
+                    @include text(14px, 400, 18px, $dark);
+
+                    position: absolute;
+                    pointer-events: none;
+                    top: 15px;
+                    left: 12px;
+                    transition: all 0.1s ease;
+                }
+
+                input:focus ~ .floating-label,
+                input:valid ~ .floating-label {
+                    top: 3px;
+                    padding-left: 12px;
+                    bottom: 0px;
+
+                    left: 0px;
+                    font-size: 11px;
+                    opacity: 1;
+                    color: #404040;
+                }
+            }
+
+            &__WrapperIcons {
+                display: flex;
+                position: absolute;
+                margin: 20px 0 0 80%;
+                @media (max-width: 400px) {
+
+                    margin: 20px 0 0 75%;
+                }
+
+
+            }
+
+            &__WrapperCheck {
+                margin-right: 4px;
+                width: 24px;
+                height: 24px;
+            }
+
+            &__firstInput, &__secondInput {
+                background: rgba(249, 249, 250, 1);
+                border: none;
+                width: 100%;
+                height: 56px;
+            }
+
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            &__firstNote, &__secondNote {
+                padding-top: 2px;
+                width: 100%;
+                @include text(12px, 500, 16px, rgb(244, 44, 79));
+
+
+                //span {
+                //    color: $gray;
+                //
+                //}
+                p {
+                    padding-left: 12px;
+                    color: $gray;
+                }
+            }
+
+            &__grayColor {
+                color: rgb(167, 167, 167);
+
+            }
+            &__redColor {
+                color: rgb(244, 44, 79)
+
+            }
+
+            &__buttonWrapper {
+                width: 100%;
+                margin-top: $paddingLarge;
+                position: relative;
+                @media (max-width: 520px) {
+                    margin-top: $paddingBig;
+                }
+            }
+
+            .question_authorization {
+                display: flex;
+                flex-wrap: wrap;
+                @include text(16px, 400, 24px, $gray-black);
+                margin-top: $paddingSmall;
+
+                p {
+                    padding-right: 16px;
+                }
+
+                &__wrapperLink {
+                    cursor: pointer;
+                    display: flex;
+
+                    @media (max-width: 342px) {
+                        margin-top: 4px;
+                    }
+
+                    span {
+                        padding-right: 12px;
+                        @include text(16px, 600, auto, $dark);
+
+
+                    }
+                }
+            }
+
+            &__forgetPassword {
+                @include text(12px,500,16px,$gray);
+                margin-top: 10px;
+                padding-left: 12px;
+            }
+            &__forgetPassword_email {
+                @include text(12px,500,16px,$gray);
+                margin-top: 2px;
+                padding-left: 12px;
+            }
+            &__wrongPassword {
+                @include text(12px,500,16px,rgba(54, 54, 54, 1));
+                margin-top: 10px;
+                padding-left: 12px;
+            }
+
+            &__message {
+                margin-top: 32px;
+                margin-bottom: 10px;
+                @include text(16px,400,24px,$dark);
+                text-align: center;
+            }
+        }
+    }
+}
+
+.registrationButtonText {
+    @include text(16px, 600, 150%, white);
+    letter-spacing: 0.2px;
+
+    @media (max-width: 520px) {
+        @include text(12px, 600, 23px, white);
+        letter-spacing: 0.2px;
+    }
+}
+
+
+
+
+.grayBorderTop {
+    border-top: 1px solid #BFC4C9;
+}
+.redBorderTop {
+    border-top: 1px solid rgb(244, 44, 79);
+}
+.buttonCheckError__wrapper {
+    position: absolute;
+
+        @include button;
+    height: 52px;
+    width: inherit;
+
+}
+.hidden {
+    display: none;
+}

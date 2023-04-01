@@ -1,14 +1,13 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError, AxiosResponse } from 'axios';
-import { AppDispatch, AppStateType } from '../store';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
+import { AppDispatch, AppStateType } from "../store";
 import {
     authAPI,
     AuthorizationType,
     CreateNewUserType,
     ResetPasswordType,
     UserType
-} from '../../api/auth';
-import { DefaultResponseTypes } from './auth-type';
+} from "../../api/auth";
 
 
 const createAppAsyncThunk = createAsyncThunk.withTypes<{
@@ -81,3 +80,4 @@ export const resetPassword = createAppAsyncThunk(
         }
     }
 );
+

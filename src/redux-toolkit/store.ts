@@ -4,12 +4,14 @@ import booksSlice from './books/books-reducer';
 import authSlice from './auth/auth-reducer';
 import commentingSlice from './commenting/commenting-reducer';
 import bookingSlice from './booking/booking-reducer';
+import profileSlice from './profile/profile-reducer';
 
 const rootReducer = combineReducers({
   booksBranch: booksSlice,
     authBranch: authSlice,
     commentsBranch: commentingSlice,
     bookingBranch: bookingSlice,
+    profileBranch: profileSlice
 
 });
 

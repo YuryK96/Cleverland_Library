@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import { NotFoundBooks } from '../../common/not-found-books';
+import { NotFoundBooks } from "../../common/not-found-books";
 import {
     getAllBooks,
     getBooksStatus,
-    getCategoriesStatus, getCategoryArrayBooksLength, getSearchArrayBooksLength
-} from '../../redux-toolkit/books/books-selectos';
-import { StatusRequestEnum } from '../../redux-toolkit/books/books-type';
-import { BookCard } from '../book/book-card';
+    getCategoriesStatus,
+    getCategoryArrayBooksLength,
+    getSearchArrayBooksLength
+} from "../../redux-toolkit/books/books-selectos";
+import { StatusRequestEnum } from "../../redux-toolkit/books/books-type";
+import { BookCard } from "../book/book-card";
 
-import { SearchPanel } from './search-panel';
+import { SearchPanel } from "./search-panel";
 
-import s from './homePage.module.scss';
-import { BookBooking } from '../book/book-booking';
-import { getBooks, getCategories } from '../../redux-toolkit/books/books-thunks';
-import { AppDispatch } from '../../redux-toolkit/store';
-import { getUserId } from '../../redux-toolkit/auth/auth-selectos';
-import { clearStatusTimeOutTrue } from '../../redux-toolkit/booking/booking-reducer';
+import s from "./homePage.module.scss";
+import { BookBooking } from "../book/book-booking";
+import { getBooks } from "../../redux-toolkit/books/books-thunks";
+import { AppDispatch } from "../../redux-toolkit/store";
+import { getUserId } from "../../redux-toolkit/auth/auth-selectos";
+import { clearStatusTimeOutTrue } from "../../redux-toolkit/booking/booking-reducer";
 
 
 export const HomePage = () => {

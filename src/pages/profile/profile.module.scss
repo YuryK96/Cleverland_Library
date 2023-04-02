@@ -56,7 +56,8 @@
             align-items: center;
             margin-left: 30px;
             .first_name,.last_name{
-            @include text(52px,500,64px,$dark)
+            @include text(52px,500,64px,$dark);
+                width: 100%;
             }
 
         }

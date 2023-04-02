@@ -1,28 +1,23 @@
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { NavLink, useNavigate } from "react-router-dom";
 
-import React, { useEffect, useState } from 'react';
-import {
-    useForm
-} from 'react-hook-form';
-import { NavLink, useNavigate } from 'react-router-dom';
-
-import { useDispatch, useSelector } from 'react-redux';
-import s from './registration.module.scss';
-import '../../../common/styles/authorization.scss';
-import { Button } from '../../../common/button';
-import rightArrow from '../../../assets/images/authorization/rightArrow.svg';
-import { useWindowSize } from '../../../hooks/window-size-hook';
-import { FirstStep } from './steps/first-step';
-import { SecondStep } from './steps/second-step';
-import { ThirdStep } from './steps/third-step';
-import { authAPI } from '../../../api/auth';
-import { AppDispatch } from '../../../redux-toolkit/store';
-import { registration } from '../../../redux-toolkit/auth/auth-thunks';
-import { StatusRequestEnum } from '../../../redux-toolkit/books/books-type';
-import { Pending } from '../../../common/pending';
-import { getAuthError, getAuthStatus } from '../../../redux-toolkit/auth/auth-selectos';
-import { AuthMessage } from '../../../common/auth-message';
-import { clearAuthError } from '../../../redux-toolkit/auth/auth-reducer';
-import { useIsAuth } from '../../../hooks/is-auth-hook';
+import { useDispatch, useSelector } from "react-redux";
+import "../../../common/styles/authorization.scss";
+import { Button } from "../../../common/button";
+import rightArrow from "../../../assets/images/authorization/rightArrow.svg";
+import { useWindowSize } from "../../../hooks/window-size-hook";
+import { FirstStep } from "./steps/first-step";
+import { SecondStep } from "./steps/second-step";
+import { ThirdStep } from "./steps/third-step";
+import { AppDispatch } from "../../../redux-toolkit/store";
+import { registration } from "../../../redux-toolkit/auth/auth-thunks";
+import { StatusRequestEnum } from "../../../redux-toolkit/books/books-type";
+import { Pending } from "../../../common/pending";
+import { getAuthError, getAuthStatus } from "../../../redux-toolkit/auth/auth-selectos";
+import { AuthMessage } from "../../../common/auth-message";
+import { clearAuthError } from "../../../redux-toolkit/auth/auth-reducer";
+import { useIsAuth } from "../../../hooks/is-auth-hook";
 
 
 export const Registration: React.FC = () => {
@@ -121,7 +116,7 @@ export const Registration: React.FC = () => {
 
                     <div className="authorization_container__buttonWrapper">
                         <div className={`buttonCheckError__wrapper ${isValid && 'hidden' }`} role='presentation' onClick={ setButtonCheckErrorStateTrue} />
-                        <div role='presentation' onClick={ ()=> {console.log(1)} }>
+                        <div role='presentation'>
                         <Button clickEvent={isValid ? nextStep : setButtonCheckErrorStateTrue}
                                 bookPageText={stepNumber === 1 ? 'СЛЕДУЮЩИЙ ШАГ' :
                                     stepNumber === 2 ? 'ПОСЛЕДНИЙ ШАГ' : 'ЗАРЕГИСТРИРОВАТЬСЯ'

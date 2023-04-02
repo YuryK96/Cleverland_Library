@@ -1,0 +1,50 @@
+@import "src/variables";
+
+.personalData {
+    margin-top: 92px;
+
+    header {
+        h1 {
+            @include text(24px,700,30px,$dark);
+        }
+        p {
+            margin-top: $paddingSmall;
+            @include text(16px,400,24px,$gray-black);
+        }
+    }
+
+    .formContainer {
+        width: 100%;
+        padding: 0;
+        min-height: auto;
+        .columnWrapper {
+            display: flex;
+            justify-content: space-between;
+
+            .firstColumn, .secondColumn {
+                width: 48%;
+            }
+        .secondColumn > div,.firstColumn > div  {
+            margin-top: 36px;
+        }
+        }
+    }
+
+    .buttonsContainer {
+        display: flex;
+        .buttonContainer {
+            width: 255px;
+            margin-right: 30px;
+        }
+    }
+
+}
+
+.hiddenNote {
+    border-top: 1px solid #BFC4C9;
+
+
+}
+.hiddenNote * {
+    opacity: 0;
+}

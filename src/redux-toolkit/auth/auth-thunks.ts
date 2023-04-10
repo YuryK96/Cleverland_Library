@@ -41,6 +41,8 @@ export const authorization = createAppAsyncThunk(
 
                 // Adding user in Local Storage
                 localStorage.setItem('user',  JSON.stringify(res.data.user));
+                // Adding password in Local Storage
+                localStorage.setItem('password',  JSON.stringify(data.password));
 
                 return res.data.user;
             });

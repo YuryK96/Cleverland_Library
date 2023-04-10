@@ -1,8 +1,9 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import InputMask from "react-input-mask";
 import { Controller, useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import s from "./personal-data.module.scss";
 import check from "../../../assets/images/authorization/check.svg";
 import openEye from "../../../assets/images/authorization/openEye.svg";
@@ -12,10 +13,12 @@ import { registration } from "../../../redux-toolkit/auth/auth-thunks";
 import { Button } from "../../../common/button";
 import rightArrow from "../../../assets/images/authorization/rightArrow.svg";
 import { useWindowSize } from "../../../hooks/window-size-hook";
+import { AppDispatch } from "../../../redux-toolkit/store";
+import { editProfileUser } from "../../../redux-toolkit/profile/profile-thunks";
 
 
 
-export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName ,email, phone}) => {
+export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName ,email, phone,userId}) => {
     const {
         register,
         handleSubmit,
@@ -24,6 +27,9 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
         reset,
         getFieldState,
         control,
+        setValue,
+        trigger,
+
         formState: { errors, isValid }
     } = useForm<FormValue>({ mode: 'onChange' });
     const [passwordShown, setPasswordShown] = useState(false);
@@ -34,11 +40,31 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
     const [isPhoneFocus, setIsPhoneFocus] = useState<boolean | null>(null);
     const [isEmailFocus, setIsEmailFocus] = useState<boolean | null>(null);
     const { mobile } = useWindowSize();
+    const dispatch = useDispatch<AppDispatch>()
     const [isEdit, setIsEdit]= useState(false)
+    const password = JSON.parse( localStorage.getItem('password') || '')
 
+    useEffect( ()=> {
+
+        setValue('email', email)
+        setValue('username', userName)
+        setValue('phone', phone)
+        setValue('lastName', lastName)
+        setValue('firstName', firstName)
+        setValue('password', password)
+
+    } ,[email,phone,lastName,firstName,  password , setValue ,userName] )
     const toggleEditMode = ()=> {
         setIsEdit(!isEdit)
     }
+    const onSubmit = (data: FormValue) => {
+      dispatch(editProfileUser( {
+          id: userId,
+          profile: data
+      } ))
+        toggleEditMode()
+    };
+
 
     const setEmailFocusStateTrue = () => {
         setIsEmailFocus(true);
@@ -49,19 +75,16 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
     const setPhoneFocusStateTrue = () => {
         setIsPhoneFocus(true);
     };
+
+
+
+
     const setPhoneFocusStateFalse = () => {
         setIsPhoneFocus(false);
     };
 
-
-
-
     const setButtonCheckErrorStateTrue = () => {
         setButtonCheckError(true);
-    };
-
-    const onSubmit = (data: FormValue) => {
-        console.log(data)
     };
     const setButtonCheckErrorStateFalse = () => {
         if (buttonCheckError) {
@@ -104,7 +127,7 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
                 <div className="authorization_container__WrapperFirstInput">
                     <input type="text" id="login"
                            disabled={!isEdit}
-                           defaultValue={userName}
+
                            onFocus={() => {
                                setButtonCheckErrorStateFalse();
                                setLoginFocusStateTrue();
@@ -142,7 +165,7 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
                 </div>
                     <div className="authorization_container__WrapperFirstInput">
                             <input type="text" id="username"
-                                   defaultValue={firstName}
+
                                    disabled={!isEdit}
                                    onFocus={ ()=> {
                                        setButtonCheckErrorStateFalse()
@@ -162,7 +185,7 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
                         <Controller name="phone" control={control} render={({ field }) => (
 
                             <InputMask type="text" id="phone"
-                                       defaultValue={phone}
+
                                        mask={['+', '3', '7', '5',  ' ', '(', /( ?(?=[2])[2]|(?=[3])[3]|(?=[4])[4]|^$ )/, firstCodeNumber === '2' ? /( ?(?=[5])[5]|(?=[9])[9]|^$ )/ : firstCodeNumber === '3' ? /( ?(?=[3])[3]|^$ )/ : firstCodeNumber === '4' ? /( ?(?=[4])[4]|^$ )/ : /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
                                        disabled={!isEdit}
                                        maskPlaceholder="+375 (xx) xxx-xx-xx"
@@ -198,16 +221,14 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
                     <div className={s.secondColumn} >
                         <div className="authorization_container__WrapperSecondInput">
                             <div className="authorization_container__WrapperIcons">
-                                <div
-                                    className="authorization_container__WrapperCheck">{!getFieldState('password').error && getValues('password') &&
-                                    <div data-test-id="checkmark"><img src={check}
-                                                                       alt="check" /></div>}  </div>
-                                {watch('password')?.length > 0 &&
+
+                                { isEdit &&
                                     <img data-test-id={passwordShown ? 'eye-opened' : 'eye-closed'}
                                          role="presentation" onClick={togglePasswordVisiblity}
                                          src={passwordShown ? openEye : closeEye} alt="eye" />}</div>
                             <input id="password"
                                    disabled={!isEdit}
+
                                    className="authorization_container__secondInput"
                                    onFocus={() => {
                                        setButtonCheckErrorStateFalse();
@@ -245,7 +266,7 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
                         </div>
                         <div className="authorization_container__WrapperSecondInput">
                             <input id="lastName"
-                                   defaultValue={lastName}
+
                                    disabled={!isEdit}
                                    className="authorization_container__secondInput"
                                    onFocus={ ()=> {
@@ -263,7 +284,7 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
                         </div>
                         <div className="authorization_container__WrapperSecondInput">
                             <input id="email"
-                                   defaultValue={email}
+
                                    disabled={!isEdit}
                                    className="authorization_container__secondInput"
                                    onFocus={ ()=> {
@@ -300,7 +321,10 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
         <div className={s.buttonContainer}>
         <div className="authorization_container__buttonWrapper">
             <div role='presentation'>
-                <Button clickEvent={  toggleEditMode }
+                <Button clickEvent={ isEdit ? ()=> { reset( {
+                    email, username: userName, lastName, firstName, password, phone
+
+                } )   ;toggleEditMode()}  : ()=>{ toggleEditMode(); trigger()} }
                         bookPageText={ isEdit ? 'ОТМЕНИТЬ' : 'РЕДАКТИРОВАТЬ'} width="100%"
                         height={mobile ? '40px' : '52px'}
                         margin="18px 0"
@@ -352,4 +376,5 @@ type PersonalDataType = {
     userName: string,
     phone: string,
     email: string
+    userId: number
 }

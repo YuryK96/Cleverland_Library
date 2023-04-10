@@ -6,9 +6,25 @@ import { authAxios, instance } from './api';
 
 export const userApi = {
     getUser() {
-        return instance.get('users/me').then((res:AxiosResponse<ProfileType>) => res)  }
+        return instance.get('users/me').then((res:AxiosResponse<ProfileType>) => res)  },
+    editProfileUser (id: number,data:EditProfileType) {
+        return instance.put( `users/${id}`, data ).then((res:AxiosResponse<ProfileType>) => res)
+    }
 
 };
+
+
+
+
+export type EditProfileType = {
+    username: string,
+    password: string
+    firstName: string,
+    lastName: string
+    phone: string
+    email: string
+}
+
 
 
 export type ProfileType = {

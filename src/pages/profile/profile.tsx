@@ -38,7 +38,7 @@ export const Profile = () => {
                 </div>
 
             </section>
-           <PersonalData email={user.email} firstName={user.firstName} lastName={user.lastName} phone={user.phone} userName={user.username}  />
+           <PersonalData email={user.email} firstName={user.firstName} lastName={user.lastName} phone={user.phone} userName={user.username} userId={user.id}  />
 
 
             <section className={s.book_booked}> book_booked</section>

@@ -25,13 +25,18 @@ import {
     getBookingTypeStatus
 } from "../../redux-toolkit/booking/booking-selectos";
 import { StatusTypeBookingEnum } from "../../redux-toolkit/booking/booking-type";
-import { getProfileError, getProfileStatus } from "../../redux-toolkit/profile/profile-selectos";
+import {
+    getProfileEditStatus,
+    getProfileError,
+    getProfileStatus
+} from "../../redux-toolkit/profile/profile-selectos";
 
 
 export const Layout = () => {
     const status = useSelector(getBooksStatus);
     const categoriesStatus = useSelector(getCategoriesStatus);
     const profileStatus = useSelector(getProfileStatus);
+    const profilEditeStatus = useSelector(getProfileEditStatus);
     const booksStatus = useSelector(getBookStatus);
     const commentStatus = useSelector(getCommentStatus);
     const commentError = useSelector(getCommentError);
@@ -71,6 +76,7 @@ export const Layout = () => {
             <Pending /> || commentStatus === StatusRequestEnum.Pending &&
             <Pending /> || bookingStatus === StatusRequestEnum.Pending &&
             <Pending /> || profileStatus === StatusRequestEnum.Pending && <Pending />
+            || profilEditeStatus === StatusRequestEnum.Pending && <Pending />
         }
 
 
@@ -98,7 +104,18 @@ export const Layout = () => {
                    isTimeOut={true} /> || profileStatus === StatusRequestEnum.Error &&
             <Error isEstimate={true} isError={true} idError="error" idCross="alert-close"
                    text="Что-то пошло не так, проверьте профиль позже"
-                   isTimeOut={true} />}
+                   isTimeOut={true} />
+        || profilEditeStatus === StatusRequestEnum.Error &&
+            <Error isEstimate={true} isError={true} idError="error" idCross="alert-close"
+                   text="Изменения не были сохранены. Попробуйте позже"
+                   isTimeOut={true} /> || profilEditeStatus === StatusRequestEnum.Success  &&
+            <Error isEstimate={true} isError={false} idError="error" idCross="alert-close"
+            text="Изменения успешно сохранены!"
+            isTimeOut={true} />
+
+
+
+        }
 
 
         <Header />

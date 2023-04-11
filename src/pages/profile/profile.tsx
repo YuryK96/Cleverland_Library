@@ -7,12 +7,23 @@ import avatar from "../../assets/images/avatar/avatar.png";
 
 import { getUserProfile } from "../../redux-toolkit/profile/profile-selectos";
 import { AppDispatch } from "../../redux-toolkit/store";
-import { getUser } from "../../redux-toolkit/profile/profile-thunks";
+import { editProfilePhoto, getUser } from "../../redux-toolkit/profile/profile-thunks";
 import { PersonalData } from "./personal-data";
 
 export const Profile = () => {
     const user = useSelector(getUserProfile)
     const dispatch = useDispatch<AppDispatch> ()
+
+
+    const choosePhoto= (e: {target:HTMLInputElement})=> {
+        if (e.target?.files?.length && user) {
+            dispatch(editProfilePhoto( {
+                id: user.id,
+                photo: e.target.files[0]
+            } ) );
+        }
+
+    }
 
     useEffect( ()=> {
 
@@ -26,10 +37,14 @@ export const Profile = () => {
         return <div className={s.profile}>
 
             <section className={s.personal_photo}>
-                <div className={s.photo}><img src={avatar} alt="personal_photo" /></div>
+
+                <div className={s.photo_wrapper}>
+                <div className={s.photo}><img src={user.avatar ? `https://strapi.cleverland.by${user.avatar}` : avatar} alt="personal_photo" /></div>
                 <div className={s.icon_photo}>
-                    <div className={s.background_photo}><img src={icon_photo} alt="icon_photo" />
+                    <div className={s.background_photo}><img src={ icon_photo} alt="icon_photo" />
                     </div>
+                </div>
+                    <input type='file' onChange={ (e)=> choosePhoto(e) } />
                 </div>
 
                 <div className={s.names}>

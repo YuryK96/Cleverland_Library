@@ -42,7 +42,7 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
     const { mobile } = useWindowSize();
     const dispatch = useDispatch<AppDispatch>()
     const [isEdit, setIsEdit]= useState(false)
-    const password = JSON.parse( localStorage.getItem('password') || '')
+    const password = JSON.parse( localStorage.getItem('password')   || '')
 
     useEffect( ()=> {
 
@@ -58,6 +58,10 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
         setIsEdit(!isEdit)
     }
     const onSubmit = (data: FormValue) => {
+        if (data.password !== password) {
+            localStorage.setItem('password', JSON.stringify(data.password))
+        }
+
       dispatch(editProfileUser( {
           id: userId,
           profile: data
@@ -234,7 +238,7 @@ export const PersonalData:FC<PersonalDataType> = ({firstName, userName, lastName
                                        setButtonCheckErrorStateFalse();
                                        setPasswordFocusStateTrue();
                                    }}
-                                   type={passwordShown ? 'text' : 'password'} {...register('password', {
+                                   type={passwordShown && isEdit ? 'text' : 'password'} {...register('password', {
                                 onBlur: () => setPasswordFocusStateFalse(),
                                 required: true, validate: {
                                     capitalLetter: (value) => /[A-ZА-Я]/.test(value[0]) || 'not a capital letter',

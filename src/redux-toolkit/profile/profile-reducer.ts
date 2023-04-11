@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { StatusRequestEnum } from "../books/books-type";
 import { InitialStateType } from "./profile-type";
-import { editProfileUser, getUser } from "./profile-thunks";
+import { editProfilePhoto, editProfileUser, getUser } from "./profile-thunks";
 
 
 const profileSlice = createSlice({
@@ -13,7 +13,9 @@ const profileSlice = createSlice({
         profileError: null,
         profileStatus: null,
         editProfileError: null,
+        editProfilePhotoError: null,
         editProfileStatus: null,
+        editProfilePhotoStatus: null,
     } as InitialStateType,
 
     reducers: {
@@ -29,6 +31,16 @@ const profileSlice = createSlice({
         }).addCase(getUser.rejected, (state, action) => {
             state.profileStatus = StatusRequestEnum.Error;
             state.profileError = action.payload as string
+        }).addCase(editProfilePhoto.fulfilled, (state, action) => {
+            state.user = action.payload;
+            state.editProfilePhotoStatus = StatusRequestEnum.Success;
+            state.editProfilePhotoError = null;
+        }).addCase(editProfilePhoto.pending, (state, action) => {
+            state.editProfilePhotoStatus = StatusRequestEnum.Pending;
+            state.editProfilePhotoError = null;
+        }).addCase(editProfilePhoto.rejected, (state, action) => {
+            state.editProfilePhotoStatus = StatusRequestEnum.Error;
+            state.editProfilePhotoError = action.payload as string
         }).addCase(editProfileUser.fulfilled, (state, action) => {
             state.user = action.payload;
             state.editProfileStatus = StatusRequestEnum.Success;

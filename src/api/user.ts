@@ -7,14 +7,53 @@ import { authAxios, instance } from './api';
 export const userApi = {
     getUser() {
         return instance.get('users/me').then((res:AxiosResponse<ProfileType>) => res)  },
-    editProfileUser (id: number,data:EditProfileType) {
+    editProfileUser (id: number,data:EditProfileType | EditProfilePhotoType) {
         return instance.put( `users/${id}`, data ).then((res:AxiosResponse<ProfileType>) => res)
+    },
+    sendPhoto(photo: string | Blob) {
+        const formData = new FormData();
+        formData.append('files', photo)
+        return instance.post('upload',  formData  ).then( (res:AxiosResponse<SendPhotoResponseType[]>)=> res )
     }
 
 };
 
 
+type SendPhotoResponseType = {
+    id: number,
+    name: string,
+    alternativeText: null,
+    caption: null,
+    width: number,
+    height: number,
+    formats: {
+        thumbnail:PhotoFormatType,
+        large: PhotoFormatType,
+        medium: PhotoFormatType,
+        small: PhotoFormatType
+    }
+    hash: string,
+    ext: string,
+    mime: string,
+    url: string,
+    preview: null,
+    provider: string,
+    provider_metadata: number,
+    createdAt: string,
+    updateAt: string,
+}
 
+type PhotoFormatType = {
+    name: string,
+    hash: string,
+    ext: string,
+    mime: string,
+    path: null,
+    width: number,
+    height: number,
+    size: number,
+    url: string,
+}
 
 export type EditProfileType = {
     username: string,
@@ -25,7 +64,9 @@ export type EditProfileType = {
     email: string
 }
 
-
+type EditProfilePhotoType = {
+    avatar: number
+}
 
 export type ProfileType = {
     id: number,

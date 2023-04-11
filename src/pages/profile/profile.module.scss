@@ -5,49 +5,65 @@
     .personal_photo {
         position: relative;
         display: flex;
-        .photo {
-            position: relative;
-            width: 160px;
-            height: 160px;
-            border-radius: 100px;
-            z-index: 3;
-             img {
-                 width: 100%;
-                 height: 100%;
-                 border-radius: 100px;
-             }
-        }
-        .icon_photo{
-            position: absolute;
-            border-radius: 100px;
-            overflow: hidden;
-            top: 0;
-            width: 160px;
-            height: 160px;
-            display: flex;
-            align-items: end;
-            justify-content: center;
 
-            z-index: 4;
-            .background_photo {
-                width: 100%;
-                height: 42px;
-                background: $dark;
-                opacity: .7;
-                overflow: hidden;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+        .photo_wrapper {
+            position: relative;
+            display: flex;
+            .photo {
+                position: relative;
+                width: 160px;
+                height: 160px;
+                border-radius: 100px;
+                z-index: 3;
                 img {
-                    margin: auto;
-                    width: 32px;
-                    height: 32px;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 100px;
                 }
             }
+            .icon_photo{
+                position: absolute;
+                border-radius: 100px;
+                overflow: hidden;
+                top: 0;
+                width: 160px;
+                height: 160px;
+                display: flex;
+                align-items: end;
+                justify-content: center;
+
+                z-index: 4;
+                .background_photo {
+                    width: 100%;
+                    height: 42px;
+                    background: $dark;
+                    opacity: .7;
+                    overflow: hidden;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img {
+                        margin: auto;
+                        width: 32px;
+                        height: 32px;
+                    }
+                }
 
 
 
+            }
+            input {
+                border: 1px solid black;
+                position: absolute;
+                width: 160px;
+                height: 160px;
+                border-radius: 100px;
+                cursor: pointer;
+                z-index: 5;
+                opacity: 0;
+            }
         }
+
 
         .names {
             display: flex;

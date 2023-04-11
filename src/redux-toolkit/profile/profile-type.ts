@@ -7,6 +7,8 @@ export type InitialStateType = {
     profileStatus: null | string,
     editProfileError: null | string,
     editProfileStatus: null | string,
+  editProfilePhotoError: null | string,
+    editProfilePhotoStatus: null | string,
 
 }
 
@@ -14,4 +16,8 @@ export type InitialStateType = {
 export type EditUserProfileType = {
     id: number,
     profile: EditProfileType
+}
+export type EditUserProfilePhotoType = {
+    id: number,
+    photo: string | Blob
 }

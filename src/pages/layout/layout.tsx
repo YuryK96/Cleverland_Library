@@ -27,7 +27,7 @@ import {
 import { StatusTypeBookingEnum } from "../../redux-toolkit/booking/booking-type";
 import {
     getProfileEditStatus,
-    getProfileError,
+    getProfileError, getProfilePhotoEditStatus,
     getProfileStatus
 } from "../../redux-toolkit/profile/profile-selectos";
 
@@ -36,6 +36,7 @@ export const Layout = () => {
     const status = useSelector(getBooksStatus);
     const categoriesStatus = useSelector(getCategoriesStatus);
     const profileStatus = useSelector(getProfileStatus);
+    const profilePhotoStatus = useSelector(getProfilePhotoEditStatus);
     const profilEditeStatus = useSelector(getProfileEditStatus);
     const booksStatus = useSelector(getBookStatus);
     const commentStatus = useSelector(getCommentStatus);
@@ -76,7 +77,7 @@ export const Layout = () => {
             <Pending /> || commentStatus === StatusRequestEnum.Pending &&
             <Pending /> || bookingStatus === StatusRequestEnum.Pending &&
             <Pending /> || profileStatus === StatusRequestEnum.Pending && <Pending />
-            || profilEditeStatus === StatusRequestEnum.Pending && <Pending />
+            || profilEditeStatus === StatusRequestEnum.Pending && <Pending />|| profilePhotoStatus === StatusRequestEnum.Pending && <Pending />
         }
 
 
@@ -111,7 +112,13 @@ export const Layout = () => {
                    isTimeOut={true} /> || profilEditeStatus === StatusRequestEnum.Success  &&
             <Error isEstimate={true} isError={false} idError="error" idCross="alert-close"
             text="Изменения успешно сохранены!"
-            isTimeOut={true} />
+            isTimeOut={true} />|| profilePhotoStatus === StatusRequestEnum.Success  &&
+            <Error isEstimate={true} isError={false} idError="error" idCross="alert-close"
+            text="Фото успешно сохранено"
+            isTimeOut={true} />  || profilePhotoStatus === StatusRequestEnum.Error &&
+            <Error isEstimate={true} isError={true} idError="error" idCross="alert-close"
+                   text="Что-то пошло не так, фото не сохранилось. Попробуйте позже!"
+                   isTimeOut={true} />
 
 
 

@@ -7,7 +7,10 @@ import { CommentType } from '../redux-toolkit/commenting/commenting-type';
 export const commentingAPI = {
     sendComment(  data:CommentType ) {
         return instance.post ('comments', { data}).then((res:AxiosResponse<DataType>) => res);
-    }  ,
+    },
+    changeComment (data:CommentType, commentId: number | null) {
+        return instance.put(`comments/${commentId}`, {data}  ).then( (res:AxiosResponse<DataType>) =>res  )
+    }
 
 };
 

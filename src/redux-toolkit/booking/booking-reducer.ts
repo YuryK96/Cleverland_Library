@@ -24,7 +24,10 @@ const bookingSlice = createSlice({
             state.status = null;
             state.error = null
 
-        }
+        },
+        clearStatusBooking(state) {
+            state.status = null;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(booking.fulfilled, (state, action) => {
@@ -63,5 +66,5 @@ const bookingSlice = createSlice({
         })
     }
 });
-export const {clearStatusTimeOut,clearStatusTimeOutTrue } = bookingSlice.actions;
+export const {clearStatusTimeOut,clearStatusTimeOutTrue,clearStatusBooking } = bookingSlice.actions;
 export default bookingSlice.reducer;

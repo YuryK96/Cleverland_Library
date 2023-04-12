@@ -25,7 +25,11 @@ const authSlice = createSlice({
 
             state.user = action.payload;
         },
+        clearStatusAuth(state) {
+            state.authStatus = null
+        },
     },
+
     extraReducers: (builder) => {
         builder.addCase(registration.fulfilled, (state, action) => {
             state.user = action.payload;
@@ -77,5 +81,5 @@ const authSlice = createSlice({
         })
     }
 });
-export const { clearAuthError,addedUser } = authSlice.actions;
+export const { clearAuthError,addedUser,clearStatusAuth } = authSlice.actions;
 export default authSlice.reducer;

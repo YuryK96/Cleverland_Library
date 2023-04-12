@@ -49,16 +49,28 @@ export const BookPage: React.FC = () => {
     const userId = useSelector(getUserId);
     const commentsReverse = useSelector(getBookCommentsReverse);
     const [isUserComment, setIsUserComment] = useState(false);
+    const [userComment, setUserComment] = useState<string | null>(null);
+    const [userEstimate, setUserEstimate] = useState<number | null>(null);
+    const [commentId, setCommentId] = useState<number | null>(null);
     const comments = useSelector(getBookComments);
     const prevComments = usePrevious(comments);
-
 
     useEffect(() => {
 
         if (JSON.stringify(comments) !== JSON.stringify(prevComments) && prevComments || comments && prevComments === undefined) {
 
             if (comments)
-                setIsUserComment(comments.some((comment) => comment.user.commentUserId === userId));
+
+                comments.some((comment) => {
+
+                  if (comment.user.commentUserId === userId)  {
+                      setIsUserComment(true);
+                      setUserComment(comment.text)
+                      setUserEstimate(comment.rating)
+                      setCommentId(comment.id)
+                  }
+                } )
+
 
         }
 
@@ -91,6 +103,10 @@ export const BookPage: React.FC = () => {
         <section className={s.bookPage}>
             {isEstimate &&
                 <BookEstimate reloadBookPage={reloadBookPage} bookId={bookId}
+                              userComment = {userComment}
+                              isUserComment={isUserComment}
+                              userEstimate={userEstimate}
+                              commentId={commentId}
                               toggleEstimateModule={toggleEstimateModule} />
             }
             {status === StatusRequestEnum.Error && <div className={s.wrapperError}><Error /></div>}

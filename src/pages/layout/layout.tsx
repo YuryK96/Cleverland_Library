@@ -18,7 +18,11 @@ import { Header } from "../header";
 import s from "./layout.module.scss";
 import { useIsAuth } from "../../hooks/is-auth-hook";
 import { addedUser } from "../../redux-toolkit/auth/auth-reducer";
-import { getCommentError, getCommentStatus } from "../../redux-toolkit/commenting/comment-selectos";
+import {
+    getChangeEstimateStatus,
+    getCommentError,
+    getCommentStatus
+} from "../../redux-toolkit/commenting/comment-selectos";
 import {
     getBookingError,
     getBookingStatus,
@@ -27,7 +31,8 @@ import {
 import { StatusTypeBookingEnum } from "../../redux-toolkit/booking/booking-type";
 import {
     getProfileEditStatus,
-    getProfileError, getProfilePhotoEditStatus,
+    getProfileError,
+    getProfilePhotoEditStatus,
     getProfileStatus
 } from "../../redux-toolkit/profile/profile-selectos";
 
@@ -39,12 +44,13 @@ export const Layout = () => {
     const profilePhotoStatus = useSelector(getProfilePhotoEditStatus);
     const profilEditeStatus = useSelector(getProfileEditStatus);
     const booksStatus = useSelector(getBookStatus);
+    const bookingTypeStatus = useSelector(getBookingTypeStatus);
+    const changeEstimateStatus = useSelector(getChangeEstimateStatus);
+    const bookingStatus = useSelector(getBookingStatus);
     const commentStatus = useSelector(getCommentStatus);
     const commentError = useSelector(getCommentError);
     const profileError = useSelector(getProfileError);
     const bookingError = useSelector(getBookingError);
-    const bookingStatus = useSelector(getBookingStatus);
-    const bookingTypeStatus = useSelector(getBookingTypeStatus);
     const dispatch = useDispatch<AppDispatch>();
     const isAuth = useIsAuth();
     const navigate = useNavigate();
@@ -77,7 +83,9 @@ export const Layout = () => {
             <Pending /> || commentStatus === StatusRequestEnum.Pending &&
             <Pending /> || bookingStatus === StatusRequestEnum.Pending &&
             <Pending /> || profileStatus === StatusRequestEnum.Pending && <Pending />
-            || profilEditeStatus === StatusRequestEnum.Pending && <Pending />|| profilePhotoStatus === StatusRequestEnum.Pending && <Pending />
+            || profilEditeStatus === StatusRequestEnum.Pending &&
+            <Pending /> || profilePhotoStatus === StatusRequestEnum.Pending &&
+            <Pending /> || changeEstimateStatus === StatusRequestEnum.Pending && <Pending />
         }
 
 
@@ -89,7 +97,18 @@ export const Layout = () => {
                    isTimeOut={true} /> || commentStatus === StatusRequestEnum.Error &&
             <Error isEstimate={true} idError="error" idCross="alert-close"
                    text="Оценка не была отправлена. Попробуйте позже!"
-                   isTimeOut={true} /> || bookingStatus === StatusRequestEnum.Success && !bookingError && status === StatusRequestEnum.Success &&
+                   isTimeOut={true} /> ||
+
+            changeEstimateStatus === StatusRequestEnum.Success && !commentError &&
+            <Error isEstimate={true} isError={false} idError="error" idCross="alert-close"
+                   text="Спасибо, что нашли время изменить оценку!"
+                   isTimeOut={true} /> || changeEstimateStatus === StatusRequestEnum.Error &&
+            <Error isEstimate={true} idError="error" idCross="alert-close"
+                   text="Изменения не были сохранены. Попробуйте позже!"
+                   isTimeOut={true} />
+
+
+            || bookingStatus === StatusRequestEnum.Success && !bookingError && status === StatusRequestEnum.Success &&
             <Error isEstimate={true} isError={false} idError="error" idCross="alert-close"
                    text={bookingTypeStatus === StatusTypeBookingEnum.changeBooking ? "Изменения успешно сохранены" : bookingTypeStatus === StatusTypeBookingEnum.deleteBooking ? "Бронирование книги успешно отменено!" : "Книга забронирована. Подробности можно посмотреть на странице Профиля"}
                    isTimeOut={true} /> || bookingStatus === StatusRequestEnum.Error && status === StatusRequestEnum.Success &&
@@ -105,21 +124,20 @@ export const Layout = () => {
                    isTimeOut={true} /> || profileStatus === StatusRequestEnum.Error &&
             <Error isEstimate={true} isError={true} idError="error" idCross="alert-close"
                    text="Что-то пошло не так, проверьте профиль позже"
-                   isTimeOut={true} />
-        || profilEditeStatus === StatusRequestEnum.Error &&
+            />
+            || profilEditeStatus === StatusRequestEnum.Error &&
             <Error isEstimate={true} isError={true} idError="error" idCross="alert-close"
                    text="Изменения не были сохранены. Попробуйте позже"
-                   isTimeOut={true} /> || profilEditeStatus === StatusRequestEnum.Success  &&
+            /> || profilEditeStatus === StatusRequestEnum.Success &&
             <Error isEstimate={true} isError={false} idError="error" idCross="alert-close"
-            text="Изменения успешно сохранены!"
-            isTimeOut={true} />|| profilePhotoStatus === StatusRequestEnum.Success  &&
+                   text="Изменения успешно сохранены!"
+            /> || profilePhotoStatus === StatusRequestEnum.Success &&
             <Error isEstimate={true} isError={false} idError="error" idCross="alert-close"
-            text="Фото успешно сохранено"
-            isTimeOut={true} />  || profilePhotoStatus === StatusRequestEnum.Error &&
+                   text="Фото успешно сохранено"
+            /> || profilePhotoStatus === StatusRequestEnum.Error &&
             <Error isEstimate={true} isError={true} idError="error" idCross="alert-close"
                    text="Что-то пошло не так, фото не сохранилось. Попробуйте позже!"
-                   isTimeOut={true} />
-
+            />
 
 
         }

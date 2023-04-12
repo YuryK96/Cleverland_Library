@@ -19,6 +19,13 @@ const profileSlice = createSlice({
     } as InitialStateType,
 
     reducers: {
+        clearStatusProfile (state) {
+           state.editProfilePhotoStatus = null;
+           state.editProfileStatus = null;
+           state.profileStatus = null;
+
+
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getUser.fulfilled, (state, action) => {
@@ -54,5 +61,5 @@ const profileSlice = createSlice({
         })
     }
 });
-export const { } = profileSlice.actions;
+export const {clearStatusProfile } = profileSlice.actions;
 export default profileSlice.reducer;

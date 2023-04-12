@@ -5,6 +5,7 @@ import { StatusRequestEnum } from '../books/books-type';
 export type InitialStateType = {
   status: StatusRequestEnum | null,
     error: string | null
+    changeEstimateStatus: StatusRequestEnum | null,
 }
 
 export type CommentType = {
@@ -12,8 +13,8 @@ export type CommentType = {
     book: string | undefined,
     user: string,
     rating: number
-    userLastName: string | undefined
-    userFirstName: string | undefined
+    userLastName?: string | undefined
+    userFirstName?: string | undefined
 }
 
 

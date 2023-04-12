@@ -4,7 +4,7 @@ import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StatusRequestEnum } from '../books/books-type';
 
 import { InitialStateType } from './commenting-type';
-import { sendComment } from './commenting-thunks';
+import { changeComment, sendComment } from "./commenting-thunks";
 
 
 
@@ -13,14 +13,20 @@ const commentingSlice = createSlice({
     initialState: {
         status: null,
         error: null,
+        changeEstimateStatus: null
 
     } as InitialStateType,
 
     reducers: {
         clearStatusTimeOutComment: (state)=> {
             state.status = null;
+            state.changeEstimateStatus = null;
             state.error = null
 
+        },
+        clearStatusComment(state){
+            state.status = null;
+            state.changeEstimateStatus = null;
         }
     },
     extraReducers: (builder) => {
@@ -34,8 +40,18 @@ const commentingSlice = createSlice({
             state.status = StatusRequestEnum.Error;
             state.error = action.payload as string
 
+        }).addCase(changeComment.fulfilled, (state, action) => {
+            state.changeEstimateStatus = StatusRequestEnum.Success;
+            state.error = null;
+        }).addCase(changeComment.pending, (state, action) => {
+            state.changeEstimateStatus = StatusRequestEnum.Pending;
+            state.error = null;
+        }).addCase(changeComment.rejected, (state, action) => {
+            state.changeEstimateStatus = StatusRequestEnum.Error;
+            state.error = action.payload as string
+
         })
     }
 });
-export const { clearStatusTimeOutComment} = commentingSlice.actions;
+export const { clearStatusTimeOutComment,clearStatusComment} = commentingSlice.actions;
 export default commentingSlice.reducer;

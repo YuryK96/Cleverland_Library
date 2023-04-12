@@ -56,10 +56,10 @@ export const BookComments: React.FC<BookCommentsType> = ({ comments,toggleEstima
 
 
           <div className={s.buttonWrapper}>
-              <Button id='button-rate-book'  isDisabled={ !isUserComment } isActive={ !isUserComment } clickEvent={() => {
+              <Button id='button-rate-book'  isUserBooked={ isUserComment }  clickEvent={() => {
                   toggleEstimateModule();
               }}  isBookEstimate={true} booking={null}
-                      bookPageText="ОЦЕНИТЬ КНИГУ" /></div>
+                      bookPageText={isUserComment ? 'ИЗМЕНИТЬ ОЦЕНКУ' : "ОЦЕНИТЬ КНИГУ"} /></div>
 
       </div>
     </div>

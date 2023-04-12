@@ -22,7 +22,7 @@ const booksSlice = createSlice({
         reducers: {
             clearStatusBook: (state)=> {
 
-                state.bookStatus = null;
+                state.bookStatus = null
                 state.bookError = null
 
             },
@@ -72,14 +72,7 @@ const booksSlice = createSlice({
                 }
 
             },
-            addComment(state, action) {
-                if (state.book?.comments) {
-                    state.book?.comments.push(action.payload);
-                } else {
-                    if (state.book)
-                    state.book.comments = [action.payload]
-                }
-            },
+
         },
         extraReducers: (builder) => {
             builder
@@ -154,6 +147,6 @@ const sortingUp = (a: number | null, b: number | null) => (b != null ? b : -Infi
 const sortingDown = (a: number | null, b: number | null) => (a != null ? a : -Infinity) - (b != null ? b : -Infinity);
 
 
-export const { sortRating, searchBooks,addComment,clearStatusBook } = booksSlice.actions;
+export const { sortRating, searchBooks,clearStatusBook } = booksSlice.actions;
 export default booksSlice.reducer;
 

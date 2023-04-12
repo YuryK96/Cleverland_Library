@@ -1,20 +1,22 @@
-import { useForm } from 'react-hook-form';
-import { FC, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
-import s from './book-estimate.module.scss';
-import { Button } from '../../../common/button';
-import { getUserId } from '../../../redux-toolkit/auth/auth-selectos';
-import { AppDispatch, AppStateType } from '../../../redux-toolkit/store';
-import { sendComment } from '../../../redux-toolkit/commenting/commenting-thunks';
-import { getBook } from '../../../redux-toolkit/books/books-thunks';
+import { useForm } from "react-hook-form";
+import { FC, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useParams } from "react-router-dom";
+import s from "./book-estimate.module.scss";
+import { Button } from "../../../common/button";
+import { getUserId } from "../../../redux-toolkit/auth/auth-selectos";
+import { AppDispatch, AppStateType } from "../../../redux-toolkit/store";
+import { changeComment, sendComment } from "../../../redux-toolkit/commenting/commenting-thunks";
+import { getBook } from "../../../redux-toolkit/books/books-thunks";
 
 
 export const BookEstimate: FC<BookEstimateType> = ({
                                                        toggleEstimateModule,
                                                        bookId,
-
-                                                       reloadBookPage
+                                                       userEstimate,userComment,
+                                                       reloadBookPage,
+                                                       isUserComment,
+                                                       commentId
                                                    }) => {
     const {
         register,
@@ -22,7 +24,7 @@ export const BookEstimate: FC<BookEstimateType> = ({
         getValues,
         watch,
         formState: { errors, isValid }
-    } = useForm<FormValueEstimate>({ mode: 'onChange' });
+    } = useForm<FormValueEstimate>({ mode: "onChange" });
     const userId = useSelector(getUserId);
 
 
@@ -32,30 +34,47 @@ export const BookEstimate: FC<BookEstimateType> = ({
     const userLastName = useSelector((state: AppStateType) => state.authBranch.user?.lastName);
 
     const dispatch = useDispatch<AppDispatch>();
-    const [selectedStar, setSelectedStar] = useState<number>(0);
-
+    const [selectedStar, setSelectedStar] = useState<number>(userEstimate || 0);
 
 
     const onSubmit = async (data: FormValueEstimate) => {
-        await dispatch(sendComment({
-            rating: selectedStar === 0 ? 1 : selectedStar,
-            text: data.text,
-            book: bookId,
-            user: String(userId),
-            userFirstName,
-            userLastName
-        })).then(() => toggleEstimateModule());
+        if (!isUserComment) {
+            await dispatch(sendComment({
+                rating: selectedStar === 0 ? 1 : selectedStar,
+                text: data.text,
+                book: bookId,
+                user: String(userId),
+                userFirstName,
+                userLastName
+            })).then(() => toggleEstimateModule());
+        }
+        else {
 
+            await dispatch(changeComment({
+                data: {
+                    rating: selectedStar === 0 ? 1 : selectedStar,
+                    text: data.text,
+                    book: bookId,
+                    user: String(userId),
+                    userFirstName,
+                    userLastName
+                },
+                commentId
+
+
+            })).then(() => toggleEstimateModule());
+        }
     };
 
     const selectCountStar = (star: number) => {
         setSelectedStar(star);
     };
 
-    return <div role="presentation"   data-test-id='modal-outer' className={s.bookLayout}>
-        <div  role='presentation' onClick={toggleEstimateModule} className={s.exitCover}/>
-        <div data-test-id='modal-rate-book' className={s.container}>
-            <div role="presentation" data-test-id='modal-close-button' onClick={toggleEstimateModule} className={s.closeButton}>
+    return <div role="presentation" data-test-id="modal-outer" className={s.bookLayout}>
+        <div role="presentation" onClick={toggleEstimateModule} className={s.exitCover} />
+        <div data-test-id="modal-rate-book" className={s.container}>
+            <div role="presentation" data-test-id="modal-close-button"
+                 onClick={toggleEstimateModule} className={s.closeButton}>
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
                     <circle cx="24" cy="24" r="24" fill="#F9F9FA" />
@@ -81,7 +100,7 @@ export const BookEstimate: FC<BookEstimateType> = ({
                     </defs>
                 </svg>
             </div>
-            <div data-test-id='modal-title' className={s.title}><span> Оцените книгу </span></div>
+            <div data-test-id="modal-title" className={s.title}><span> Оцените книгу </span></div>
 
             <div className={s.subTitle}>Ваша оценка</div>
 
@@ -89,7 +108,7 @@ export const BookEstimate: FC<BookEstimateType> = ({
                 <div data-test-id="rating" className={s.star_container}>
                     <div data-test-id="star" role="presentation" onClick={() => selectCountStar(5)}
                          className={`${s.star_item} ${selectedStar >= 5 && s.star_full}`}>
-                        <svg data-test-id={selectedStar >= 1 && 'star-active'} width="36"
+                        <svg data-test-id={selectedStar >= 1 && "star-active"} width="36"
                              height="34" viewBox="0 0 36 34" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -101,7 +120,7 @@ export const BookEstimate: FC<BookEstimateType> = ({
                     <div data-test-id="star"
                          className={`${s.star_item} ${selectedStar >= 4 && s.star_full}`}
                          role="presentation" onClick={() => selectCountStar(4)}>
-                        <svg data-test-id={selectedStar >= 2 && 'star-active'} width="36"
+                        <svg data-test-id={selectedStar >= 2 && "star-active"} width="36"
                              height="34" viewBox="0 0 36 34" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -113,7 +132,7 @@ export const BookEstimate: FC<BookEstimateType> = ({
                     <div data-test-id="star"
                          className={`${s.star_item} ${selectedStar >= 3 && s.star_full}`}
                          role="presentation" onClick={() => selectCountStar(3)}>
-                        <svg data-test-id={selectedStar >= 3 && 'star-active'} width="36"
+                        <svg data-test-id={selectedStar >= 3 && "star-active"} width="36"
                              height="34" viewBox="0 0 36 34" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -125,7 +144,7 @@ export const BookEstimate: FC<BookEstimateType> = ({
                     <div data-test-id="star"
                          className={`${s.star_item} ${selectedStar >= 2 && s.star_full}`}
                          role="presentation" onClick={() => selectCountStar(2)}>
-                        <svg data-test-id={selectedStar >= 4 && 'star-active'} width="36"
+                        <svg data-test-id={selectedStar >= 4 && "star-active"} width="36"
                              height="34" viewBox="0 0 36 34" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -137,7 +156,7 @@ export const BookEstimate: FC<BookEstimateType> = ({
                     <div data-test-id="star"
                          className={`${s.star_item} ${selectedStar >= 1 && s.star_full}`}
                          role="presentation" onClick={() => selectCountStar(1)}>
-                        <svg data-test-id={selectedStar >= 5 && 'star-active'} width="36"
+                        <svg data-test-id={selectedStar >= 5 && "star-active"} width="36"
                              height="34" viewBox="0 0 36 34" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -149,14 +168,15 @@ export const BookEstimate: FC<BookEstimateType> = ({
                 </div>
             </div>
 
-            <div  className={s.comment}>
+            <div className={s.comment}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <textarea  data-test-id='comment'   {...register('text', {})} placeholder="Оставить отзыв" />
+                    <textarea data-test-id="comment" defaultValue={userComment || ''}   {...register("text", {})}
+                              placeholder="Оставить отзыв" />
                 </form>
             </div>
 
             <div className={s.button}>
-                <Button id='button-comment' clickEvent={async () => {
+                <Button id="button-comment" clickEvent={async () => {
                     await handleSubmit(onSubmit)().then(() => {
                         reloadBookPage();
                     });
@@ -165,7 +185,6 @@ export const BookEstimate: FC<BookEstimateType> = ({
                         bookPageText="ОЦЕНИТЬ" /></div>
 
         </div>
-
 
 
     </div>;
@@ -179,6 +198,9 @@ type FormValueEstimate = {
 type BookEstimateType = {
     toggleEstimateModule: () => void;
     bookId: string | undefined
-
-    reloadBookPage: ()=> void
+    userComment: string | null
+    userEstimate: number | null
+    reloadBookPage: () => void
+    isUserComment: boolean
+    commentId: number | null
 }
